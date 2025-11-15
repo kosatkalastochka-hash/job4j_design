@@ -1,6 +1,6 @@
 package ru.job4j;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -115,8 +115,7 @@ class BoxTest {
 
     @Test
     void  getAreaWenNotExist(){
-        double a = 4.0;
-        Box box = new Box(12,(int) 4);
+        Box box = new Box(12, 4);
         double result = box.getArea();
         assertThat(result) .isGreaterThan(-20.0)
                 .isLessThan(1.0)

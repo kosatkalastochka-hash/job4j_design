@@ -6,23 +6,17 @@ public class MatrixIterator implements Iterator<Integer> {
     private final int[][] data;
     private int row;
     private int column;
-    private final int lastRow;
 
     public MatrixIterator(int[][] data) {
         this.data = data;
-        this.lastRow = initializationLastRow();
-    }
-
-    private int initializationLastRow() {
-        int lastRow = data.length - 1;
-        for (int i = data.length - 1; i >= 0 && data[i].length == 0; i--) {
-            lastRow = i;
-        }
-        return lastRow;
     }
 
     @Override
     public boolean hasNext() {
+            int lastRow = data.length - 1;
+            for (int i = data.length - 1; i >= 0 && data[i].length == 0; i--) {
+                lastRow = i;
+            }
         return row < lastRow || column < data[lastRow].length;
     }
 

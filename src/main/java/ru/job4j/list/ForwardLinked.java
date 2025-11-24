@@ -49,7 +49,7 @@ public class ForwardLinked<T> implements Iterable<T> {
         head.next = null;
         head.item = null;
         head = next;
-        size++;
+        size--;
         modCount++;
         return result;
     }

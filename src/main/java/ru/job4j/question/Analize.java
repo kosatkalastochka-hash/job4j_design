@@ -1,30 +1,24 @@
 package ru.job4j.question;
-import java.util.Iterator;
-import java.util.Set;
+
+import java.util.*;
 
 public class Analize {
+
     public static Info diff(Set<User> previous, Set<User> current) {
         int added = 0, changed = 0, deleted = 0;
-        Iterator<User> currentIterator = current.iterator();
-        Iterator<User> previosIterator = previous.iterator();
-        while (currentIterator.hasNext()) {
-            User currentUser = currentIterator.next();
-            if (!previous.contains(currentUser)) {
+        Map<User, String> map = new HashMap<>();
+        for (User user : previous) {
+            map.put(user, user.getName());
+        }
+        for (User user : current) {
+            String username = map.remove(user);
+            if (username == null) {
                 added++;
-            } else {
-                for (User user : previous) {
-                    if (currentUser.equals(user) && !currentUser.getName().equals(user.getName())) {
-                        changed++;
-                    }
-                }
-            }
-            while (previosIterator.hasNext()) {
-                User previousUser = previosIterator.next();
-                if (!current.contains(previousUser)) {
-                    deleted++;
-                }
+            } else if (!username.equals(user.getName())) {
+                changed++;
             }
         }
+        deleted = map.size();
         return new Info(added, changed, deleted);
     }
 }

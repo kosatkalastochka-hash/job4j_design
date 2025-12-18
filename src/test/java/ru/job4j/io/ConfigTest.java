@@ -9,7 +9,7 @@ class ConfigTest {
 
     @Test
     void whenPairWithoutComment() {
-        String path = ".\\data\\pair_without_comment.properties";
+        String path = "./data/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name")).isEqualTo("Petr Arsentev");
@@ -17,7 +17,7 @@ class ConfigTest {
 
     @Test
     void whenWithCommentAndEmpty() {
-        String path = ".\\data\\app.properties";
+        String path = "./data/app.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.dialect")).isEqualTo("org.hibernate.dialect.PostgreSQLDialect");
@@ -29,7 +29,7 @@ class ConfigTest {
 
     @Test
     void whenWithEqualsInEnd() {
-        String path = ".\\data\\test1.properties";
+        String path = "./data/test1.properties";
         Config config = new Config(path);
        assertThatThrownBy(config::load)
                .isInstanceOf(IllegalArgumentException.class);
@@ -37,7 +37,7 @@ class ConfigTest {
 
     @Test
     void whenWithEqualsInStart() {
-        String path = ".\\data\\test2.properties";
+        String path = "./data/test2.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class);
@@ -45,7 +45,7 @@ class ConfigTest {
 
     @Test
     void whenWithNotEquals() {
-        String path = ".\\data\\test3.properties";
+        String path = "./data/test3.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class);
@@ -53,7 +53,7 @@ class ConfigTest {
 
     @Test
     void whenOnlyEquals() {
-        String path = ".\\data\\test4.properties";
+        String path = "./data/test4.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class);

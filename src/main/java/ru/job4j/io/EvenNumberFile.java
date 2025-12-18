@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class EvenNumberFile {
     public static void main(String[] args) {
         StringBuilder text = new StringBuilder();
-        try (FileInputStream input = new FileInputStream(".\\src\\data\\even.txt")) {
+        try (FileInputStream input = new FileInputStream(".\\data\\even.txt")) {
             int read;
             while ((read = input.read()) != -1) {
                 text.append((char) read);

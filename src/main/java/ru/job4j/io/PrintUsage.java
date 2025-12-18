@@ -5,7 +5,7 @@ import java.io.*;
 public class PrintUsage {
 
     public static void main(String[] args) {
-        File file = new File(".\\src\\data\\print.txt");
+        File file = new File(".\\data\\print.txt");
         try (PrintStream stream = new PrintStream(new FileOutputStream(file));
              PrintWriter writer = new PrintWriter(file)) {
             stream.println("Из PrintStream в FileOutputStream");

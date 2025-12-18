@@ -25,7 +25,7 @@ public class ByteArrayStream {
         out.writeBytes(bytes2);
         System.out.println(out);
         byte[] byteArray = out.toByteArray();
-        try (FileOutputStream fileout = new FileOutputStream(".\\src\\data\\message.txt")) {
+        try (FileOutputStream fileout = new FileOutputStream(".\\data\\message.txt")) {
             out.writeTo(fileout);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

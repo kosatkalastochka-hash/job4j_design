@@ -36,4 +36,15 @@ public class Config {
     public String value(String key) {
         return values.get(key);
     }
+
+    @Override
+    public String toString() {
+        StringJoiner output = new StringJoiner(System.lineSeparator());
+        try (BufferedReader reader = new BufferedReader(new FileReader(this.path))) {
+            reader.lines().forEach(output::add);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return output.toString();
+    }
 }

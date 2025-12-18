@@ -23,8 +23,22 @@ public class LogFilter {
         }
     }
 
+    public void saveTo(String out) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(out))) {
+            filter().forEach(str -> {
+                try {
+                    writer.write(str);
+                    writer.newLine();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
-        LogFilter logFilter = new LogFilter("data/log.txt");
-        logFilter.filter().forEach(System.out::println);
+        new LogFilter("data/log.txt").saveTo("data/404.txt");
     }
 }

@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    Set<FileProperty> pathSet = new HashSet<>();
-    Set<Path> duplicatesSet = new HashSet<>();
+    private final Set<FileProperty> pathSet = new HashSet<>();
+    private final Set<Path> duplicatesSet = new HashSet<>();
 
     @Override
     public FileVisitResult visitFile(Path file,

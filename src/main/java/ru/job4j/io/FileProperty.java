@@ -13,6 +13,12 @@ public class FileProperty {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "FileProperty{" + "name='" + name + '\''
+                + ", size=" + size + '}';
+    }
+
     public long getSize() {
         return size;
     }

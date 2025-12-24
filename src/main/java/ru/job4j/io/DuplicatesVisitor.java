@@ -1,30 +1,35 @@
 package ru.job4j.io;
 
-import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    private final Set<FileProperty> pathSet = new HashSet<>();
-    private final Set<Path> duplicatesSet = new HashSet<>();
+    private final Map<FileProperty, Path> pathMap = new HashMap<>();
+    private final Map<FileProperty, Set<Path>> duplicatesMap = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file,
-                                     BasicFileAttributes attributes) throws IOException {
+                                     BasicFileAttributes attributes)  {
         FileProperty fileProperty = new FileProperty(file.toFile().length(), file.toFile().getName());
-        if (pathSet.contains(fileProperty)) {
-            duplicatesSet.add(file.normalize().toAbsolutePath());
+        if (pathMap.containsKey(fileProperty)) {
+            Set<Path> set = new HashSet<>();
+            set.add(pathMap.get(fileProperty).normalize().toAbsolutePath());
+            set.add(file.normalize().toAbsolutePath());
+            duplicatesMap.put(fileProperty, set);
         } else {
-            pathSet.add(fileProperty);
+            pathMap.put(fileProperty, file.normalize().toAbsolutePath());
         }
         return FileVisitResult.CONTINUE;
     }
 
-    public Set<Path> getDuplicatesSet() {
-        return duplicatesSet;
+    public Map<FileProperty, Set<Path>> getDuplicatesMap() {
+        return duplicatesMap;
     }
+
 }

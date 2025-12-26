@@ -15,13 +15,17 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file,
-                                     BasicFileAttributes attributes)  {
+                                     BasicFileAttributes attributes) {
         FileProperty fileProperty = new FileProperty(file.toFile().length(), file.toFile().getName());
         if (pathMap.containsKey(fileProperty)) {
-            Set<Path> set = new HashSet<>();
-            set.add(pathMap.get(fileProperty).normalize().toAbsolutePath());
-            set.add(file.normalize().toAbsolutePath());
-            duplicatesMap.put(fileProperty, set);
+            if (duplicatesMap.containsKey(fileProperty)) {
+                duplicatesMap.get(fileProperty).add(file.normalize().toAbsolutePath());
+            } else {
+                Set<Path> set = new HashSet<>();
+                set.add(pathMap.get(fileProperty).normalize().toAbsolutePath());
+                set.add(file.normalize().toAbsolutePath());
+                duplicatesMap.put(fileProperty, set);
+            }
         } else {
             pathMap.put(fileProperty, file.normalize().toAbsolutePath());
         }

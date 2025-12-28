@@ -29,7 +29,11 @@ public class ArgsName {
         }
     }
 
-    private void parse(String[] args) {
+    protected Map<String, String> getValues() {
+        return values;
+    }
+
+    protected void parse(String[] args) {
         if (args.length == 0) {
             throw new IllegalArgumentException("Arguments not passed to program");
         }
@@ -38,6 +42,7 @@ public class ArgsName {
             String[] strings = arg.split("=", 2);
             values.put(strings[0].substring(1), strings[1]);
         }
+
     }
 
     public static ArgsName of(String[] args) {

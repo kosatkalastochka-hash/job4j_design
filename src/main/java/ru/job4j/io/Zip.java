@@ -1,4 +1,5 @@
 package ru.job4j.io;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,15 +17,15 @@ public class Zip {
         Path source = Paths.get(names.get("d"));
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
             sources.forEach(path -> {
-                        try (BufferedInputStream input = new BufferedInputStream(new FileInputStream(path.toFile()))) {
-                            String intermediate = (source.relativize(path)).toString();
-                            zip.putNextEntry(new ZipEntry(intermediate));
-                            zip.write(input.readAllBytes());
-                            zip.closeEntry();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
+                try (BufferedInputStream input = new BufferedInputStream(new FileInputStream(path.toFile()))) {
+                    String intermediate = (source.relativize(path)).toString();
+                    zip.putNextEntry(new ZipEntry(intermediate));
+                    zip.write(input.readAllBytes());
+                    zip.closeEntry();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -38,9 +39,11 @@ public class Zip {
         if (values.size() != 3) {
             throw new IllegalArgumentException(String.format("Error: "
                     + "Invalid number of arguments specified, passed out %s of 3", values.size()));
-        } else if (!sources.exists()) {
+        }
+        if (!sources.exists()) {
             throw new IllegalArgumentException("Directory does not exist");
-        } else if (!target.getName().endsWith(".zip")) {
+        }
+        if (!target.getName().endsWith(".zip")) {
             throw new IllegalArgumentException("The directory extension is incorrect, the correct extension is \".zip\"");
         }
     }

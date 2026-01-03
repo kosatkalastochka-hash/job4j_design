@@ -32,6 +32,7 @@ public class ConsoleChat {
         List<String> phrases = readPhrases();
         List<String> log = new ArrayList<>();
         boolean flag = true;
+        Random random = new Random();
         try (sc) {
             String choice = "";
             while (!p3.matcher(choice).matches()) {
@@ -43,7 +44,6 @@ public class ConsoleChat {
                     case String s when p2.matcher(s).matches() -> flag = true;
                     default -> {
                         if (flag && !p3.matcher(choice).matches()) {
-                            Random random = new Random();
                             int index = random.nextInt(phrases.size());
                             String answer = phrases.get(index);
                             log.add(answer);

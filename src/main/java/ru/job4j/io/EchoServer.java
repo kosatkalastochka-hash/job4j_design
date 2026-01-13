@@ -19,7 +19,8 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     String string = input.readLine();
                     System.out.println(string);
-                    if (string.matches("^(?!GET /\\?msg=).*") || string.split("=", 2)[2].trim().equals("HTTP/1.1")) {
+
+                    if (string.matches("^(?!GET /\\?msg=).*") || "HTTP/1.1".equals(string.split("=", 2)[2].trim())) {
                         output.println("HTTP/1.1 400 Bad Request");
                         output.println();
                         output.println("Invalid request, please enter your request after http://localhost:9000/?msg=");
@@ -29,7 +30,7 @@ public class EchoServer {
                     output.println();
                     String value = (string.split("=", 2))[1].trim();
                     String message = value.substring(0, value.length() - 9);
-                    if (message.equals("Exit")) {
+                    if ("Exit".equals(message)) {
                         server.close();
                     } else {
                         output.println(message);
@@ -37,7 +38,7 @@ public class EchoServer {
                 }
             }
         } catch (IOException e) {
-LOG.error("Соединение потеряно или отклонено во время обмена данными по сети", e);
+            LOG.error("Соединение потеряно или отклонено во время обмена данными по сети", e);
         }
     }
 }

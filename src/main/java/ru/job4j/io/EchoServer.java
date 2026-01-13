@@ -24,7 +24,7 @@ public class EchoServer {
                     output.println();
                     String value = (string.split("=", 2))[1].trim();
                     String message = value.substring(0, value.length() - 9);
-                    if (message.equals("Bye")) {
+                    if (message.equals("Exit")) {
                         server.close();
                     } else {
                         output.println(message);

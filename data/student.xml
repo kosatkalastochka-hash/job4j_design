@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<student age="21" name="Андрей" served="true">
+        <contact zipCode="4569" phone="+7-996-532-34-98"/>
+    <books>
+        <book>Биология</book>
+        <book>Геометрия</book>
+        <book>Химия</book>
+            </books>
+</student>

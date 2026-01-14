@@ -1,4 +1,4 @@
-package ru.job4j.io;
+package ru.job4j.io.serialization;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -23,7 +23,7 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Contact{ zipCode= %d, phone= %s }%n",
+        return String.format("Contact{ zipCode= %d, phone= %s }",
                 zipCode,
                 phone);
     }

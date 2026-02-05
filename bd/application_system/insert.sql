@@ -1,8 +1,8 @@
-INSERT INTO roles(name)
-VALUES('system_administrator'),
-('basic_rights'),
-('order_processing'),
-('working_with_files');
+INSERT INTO roles(name,user_id)
+VALUES('system_administrator',1),
+('basic_rights',2),
+('order_processing',2),
+('working_with_files',3);
 
 SELECT * FROM roles;
 
@@ -53,11 +53,11 @@ VALUES
 
 SELECT * FROM items;
 
-INSERT INTO  users(first_name,larst_name,roles_id,items_id)
+INSERT INTO  users(first_name,larst_name,items_id)
 VALUES
-('Ludmila','Shlyapkina',1,1),
-('Ivan','Ivanov',3,2),
-('Olga','Verstova',2,3);
+('Ludmila','Shlyapkina',1),
+('Ivan','Ivanov',2),
+('Olga','Verstova',3);
 
 SELECT * FROM users;
 

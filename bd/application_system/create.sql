@@ -1,6 +1,7 @@
 CREATE TABLE roles(
 id SERIAL PRIMARY KEY,
-name VARCHAR(128)
+name VARCHAR(128),
+user_id INT REFERENCES user(id)
 );
 
 SELECT * FROM roles;
@@ -47,7 +48,6 @@ CREATE TABLE users(
 id SERIAL PRIMARY KEY,
 first_name VARCHAR(128),
 larst_name VARCHAR(128),
-roles_id INT REFERENCES roles(id),
 items_id INT REFERENCES items(id)
 );
 

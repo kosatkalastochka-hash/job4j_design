@@ -67,9 +67,6 @@ INSERT INTO teens (name, gender) VALUES
 ('Андрей', 'M'),
 ('Наталья', 'Ж');
 
-SELECT DISTINCT boy.name||' '||girl.name pair FROM
-(SELECT * FROM teens
-WHERE gender = 'M') boy
-CROSS JOIN
-(SELECT * FROM teens
-WHERE gender = 'Ж') girl;
+SELECT tb.name||' '||tg.name pair FROM teens tb
+CROSS JOIN teens tg
+WHERE tb.gender <> tg.gender;

@@ -1,8 +1,8 @@
-INSERT INTO roles(name,user_id)
-VALUES('system_administrator',1),
-('basic_rights',2),
-('order_processing',2),
-('working_with_files',3);
+INSERT INTO roles(name)
+VALUES('system_administrator'),
+('basic_rights'),
+('order_processing'),
+('working_with_files');
 
 SELECT * FROM roles;
 
@@ -29,51 +29,50 @@ VALUES
 
 SELECT * FROM roles_rules;
 
-INSERT INTO comments(comment)
-VALUES
-('delivery_by_courier'),
-( 'delivery_during_business_hours'),
-('delivery by prepayment');
-
-SELECT * FROM comments;
-
-INSERT INTO attachs(file_path)
-VALUES
-('D:\wholesalers'),
-( 'D:\retail'),
-('D:\firm');
-
-SELECT * FROM attachs;
-
-INSERT INTO items(name, comments_id, attachs_id )
-VALUES
-('WH000-0001 from 01.02.2026',NULL,1),
-('RE000-0005 from 01.01.2026',1,2),
-('FI000-0007 from 23.01.2026',2,3);
-
-SELECT * FROM items;
-
-INSERT INTO  users(first_name,larst_name,items_id)
+INSERT INTO  users(first_name,larst_name,roles_id)
 VALUES
 ('Ludmila','Shlyapkina',1),
 ('Ivan','Ivanov',2),
-('Olga','Verstova',3);
+('Olga','Verstova',4);
 
 SELECT * FROM users;
 
-INSERT INTO  states(status,items_id)
+INSERT INTO  states(status)
 VALUES
-('to_be_agreed',1),
-('in_reserve',2),
-('for_shipment',3);
+('to_be_agreed'),
+('in_reserve'),
+('for_shipment');
 
 SELECT * FROM states;
 
-INSERT INTO  categories(category,
-items_id)
+INSERT INTO  categories(category)
 VALUES
-('wholesale',1),
-('retail',2),
-('firm',3);
+('wholesale'),
+('retail'),
+('firm');
 
 SELECT * FROM categories;
+
+INSERT INTO items(name, user_id, categories_id, states_id)
+VALUES
+('WH000-0001 from 01.02.2026',1,1,2),
+('RE000-0005 from 01.01.2026',2,2,1),
+('FI000-0007 from 23.01.2026',3,3,3);
+
+SELECT * FROM items;
+
+INSERT INTO comments(comment, items_id)
+VALUES
+('delivery_by_courier',1),
+( 'delivery_during_business_hours',2),
+('delivery by prepayment',3);
+
+SELECT * FROM comments;
+
+INSERT INTO attachs(file_path, items_id)
+VALUES
+('D:\wholesalers',1),
+( 'D:\retail',2),
+('D:\firm',3);
+
+SELECT * FROM attachs;

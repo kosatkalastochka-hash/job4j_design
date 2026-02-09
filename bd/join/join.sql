@@ -69,4 +69,4 @@ INSERT INTO teens (name, gender) VALUES
 
 SELECT tb.name||' '||tg.name pair FROM teens tb
 CROSS JOIN teens tg
-WHERE tb.gender <> tg.gender;
+WHERE tb.gender = 'M' AND tg.gender = 'Ж';

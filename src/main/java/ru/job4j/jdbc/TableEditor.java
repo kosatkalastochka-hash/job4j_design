@@ -22,10 +22,10 @@ public class TableEditor implements AutoCloseable {
     private void initConnection() {
         try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
             properties.load(in);
-            Class.forName(properties.getProperty("hibernate.connection.driver_class"));
-            String url = properties.getProperty("hibernate.connection.url");
-            String login = properties.getProperty("hibernate.connection.username");
-            String password = properties.getProperty("hibernate.connection.password");
+            Class.forName(properties.getProperty("jdbc.driver"));
+            String url = properties.getProperty("jdbc.url");
+            String login = properties.getProperty("jdbc.username");
+            String password = properties.getProperty("jdbc.password");
             connection = getConnection(url, login, password);
         } catch (IOException | SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

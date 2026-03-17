@@ -1,0 +1,17 @@
+SELECT p.name, c.name  FROM people p
+JOIN companies c
+ON  p.company_id = c.id
+WHERE company_id <> 5;
+
+SELECT c.name company_name,  COUNT(p.name) number_of_people
+FROM  companies c
+LEFT JOIN  people p
+ON  p.company_id = c.id
+GROUP BY c.name
+HAVING number_of_people =
+(SELECT COUNT(p1.name) n_of_p  FROM companies c1
+LEFT JOIN people p1
+ON  p1.company_id = c1.id
+GROUP BY c1.name
+ORDER BY n_of_p DESC
+LIMIT 1);

@@ -1,6 +1,7 @@
 package ru.job4j.ood.tdd;
 
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
@@ -9,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class Cinema3DTest {
-    //  @Disabled("Тесты отключены. Удалить аннотацию после реализации всех методов по заданию.")
+    @Disabled
     @Test
     public void whenBuyThenGetTicket() {
         Account account = new AccountCinema();

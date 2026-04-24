@@ -29,7 +29,7 @@ class ReportEngineTest {
                 .append(worker.getName()).append(" ")
                 .append(worker.getSalary())
                 .append(System.lineSeparator());
-        assertThat(engine.generate(employee -> true,ReportType.HR,null,null)).isEqualTo(expected.toString());
+        assertThat(engine.generate(employee -> true, ReportType.HR, null, null)).isEqualTo(expected.toString());
     }
 
     @Test
@@ -39,17 +39,17 @@ class ReportEngineTest {
         StringBuilder expected = new StringBuilder()
                 .append("Name; Hired; Fired; Salary")
                 .append(System.lineSeparator());
-        assertThat(engine.generate(employee -> false,ReportType.PROGRAMMER,null,null)).isEqualTo(expected.toString());
+        assertThat(engine.generate(employee -> false, ReportType.PROGRAMMER, null, null)).isEqualTo(expected.toString());
     }
 
     @Test
     public void whenPredicateNull() {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        assertThatThrownBy(() ->engine.generate(null,ReportType.PROGRAMMER,null,null))
+        assertThatThrownBy(() -> engine.generate(null, ReportType.PROGRAMMER, null, null))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage( """
-                    Для построения отчета необходимо знать критерии отбора сотрудников, укажите filter.""")
+                .hasMessage("""
+                        Для построения отчета необходимо знать критерии отбора сотрудников, укажите filter.""")
         ;
     }
 
@@ -63,9 +63,9 @@ class ReportEngineTest {
                 .append(worker.getName()).append(" ")
                 .append(parser.parse(worker.getHired())).append(" ")
                 .append(parser.parse(worker.getFired())).append(" ")
-                .append(worker.getSalary()*65)
+                .append(worker.getSalary() * 65)
                 .append(System.lineSeparator());
-        assertThat(engine.generate(employee -> true,ReportType.ACCOUNTING, Currency.USD, Currency.RUB)).isEqualTo(expected.toString());
+        assertThat(engine.generate(employee -> true, ReportType.ACCOUNTING, Currency.USD, Currency.RUB)).isEqualTo(expected.toString());
     }
 
     @Test
@@ -78,7 +78,7 @@ class ReportEngineTest {
                 .append(worker.getName()).append(" ")
                 .append(parser.parse(worker.getHired())).append(" ")
                 .append(parser.parse(worker.getFired())).append(" ")
-                .append(worker.getSalary()*63)
+                .append(worker.getSalary() * 63)
                 .append(System.lineSeparator());
         assertThat(engine.generate(employee -> true, ReportType.ACCOUNTING, Currency.EUR, Currency.RUB)).isEqualTo(expected.toString());
     }
@@ -93,9 +93,9 @@ class ReportEngineTest {
                 .append(worker.getName()).append(" ")
                 .append(parser.parse(worker.getHired())).append(" ")
                 .append(parser.parse(worker.getFired())).append(" ")
-                .append(worker.getSalary()*1.0218)
+                .append(worker.getSalary() * 1.0218)
                 .append(System.lineSeparator());
-        assertThat(engine.generate(employee -> true,ReportType.ACCOUNTING, Currency.USD, Currency.EUR)).isEqualTo(expected.toString());
+        assertThat(engine.generate(employee -> true, ReportType.ACCOUNTING, Currency.USD, Currency.EUR)).isEqualTo(expected.toString());
     }
 
     @Test
@@ -108,7 +108,7 @@ class ReportEngineTest {
                 .append(worker.getName()).append(" ")
                 .append(parser.parse(worker.getHired())).append(" ")
                 .append(parser.parse(worker.getFired())).append(" ")
-                .append(worker.getSalary()*0.9786)
+                .append(worker.getSalary() * 0.9786)
                 .append(System.lineSeparator());
         assertThat(engine.generate(employee -> true, ReportType.ACCOUNTING, Currency.EUR, Currency.USD)).isEqualTo(expected.toString());
     }
@@ -117,7 +117,7 @@ class ReportEngineTest {
     public void whenReportTypeNull() {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        assertThatThrownBy(() ->engine.generate(employee -> true,null,null,null))
+        assertThatThrownBy(() -> engine.generate(employee -> true, null, null, null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Для построения отчета необходимо знать его тип , укажите type.");
     }
@@ -127,11 +127,11 @@ class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store, parser);
-        assertThatThrownBy(() ->engine.generate(employee -> true,ReportType.ACCOUNTING,null,Currency.RUB))
+        assertThatThrownBy(() -> engine.generate(employee -> true, ReportType.ACCOUNTING, null, Currency.RUB))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("""
-                                    В отчете ACCOUNTING  используется конвертация из исходной  
-                                    в целевую валюту - укажите:source,target.""");
+                        В отчете ACCOUNTING  используется конвертация из исходной  
+                        в целевую валюту - укажите:source,target.""");
     }
 
     @Test
@@ -139,11 +139,11 @@ class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store, parser);
-        assertThatThrownBy(() ->engine.generate(employee -> true,ReportType.ACCOUNTING,Currency.USD,null))
+        assertThatThrownBy(() -> engine.generate(employee -> true, ReportType.ACCOUNTING, Currency.USD, null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("""
-                                    В отчете ACCOUNTING  используется конвертация из исходной  
-                                    в целевую валюту - укажите:source,target.""");
+                        В отчете ACCOUNTING  используется конвертация из исходной  
+                        в целевую валюту - укажите:source,target.""");
     }
 
     @Test
@@ -166,6 +166,6 @@ class ReportEngineTest {
                 .append(worker2.getName()).append(" ")
                 .append(worker2.getSalary())
                 .append(System.lineSeparator());
-        assertThat(engine.generate(employee -> true,ReportType.HR,null,null)).isEqualTo(expected.toString());
+        assertThat(engine.generate(employee -> true, ReportType.HR, null, null)).isEqualTo(expected.toString());
     }
 }

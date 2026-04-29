@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class AbstractStore implements Store {
-    private List<Food> foods = new ArrayList<>();
-    Predicate<Double> predicate;
+    private  List<Food> foods = new ArrayList<>();
+    private  Predicate<Double> predicate;
 
     public AbstractStore(Predicate<Double> predicate) {
         this.predicate = predicate;
     }
 
     public boolean add(Food food) {
-        if (predicate.test(food.distribution())) {
+        if (predicate.test(food.calculateRemainingShelfLife())) {
             foods.add(food);
             return true;
         }

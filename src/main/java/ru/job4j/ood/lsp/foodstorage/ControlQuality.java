@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControlQuality {
-    List<Store> stores;
-    List<Food> products;
+   private final List<Store> stores;
+   private final List<Food> products;
 
     public ControlQuality(List<Food> products, Store... stores) {
         this.stores = List.of(stores);

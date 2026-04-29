@@ -48,7 +48,7 @@ public class Food {
         return price * (1 - discount / 100);
     }
 
-    protected double distribution() {
+    protected double calculateRemainingShelfLife() {
         long timeValid = ChronoUnit.DAYS.between(createDate, expiryDate);
         long timeValidNow = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
         return (double) timeValidNow / timeValid;

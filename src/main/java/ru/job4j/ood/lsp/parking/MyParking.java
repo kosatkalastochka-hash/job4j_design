@@ -118,6 +118,9 @@ public class MyParking implements Parking {
         if (space == null || transport == null) {
             throw new IllegalArgumentException("Недопустимое значение аргумента: space,transport не может быть null.");
         }
+        if (regNumberToSpace.containsKey(transport.getRegistrationNumber())) {
+            throw new IllegalArgumentException("Данный транспорт уже запаркован.");
+        }
         String currentRegistrationNumber = transport.getRegistrationNumber();
         List<Space> currentSpaces = new ArrayList<>();
         if (transport.getSize() == 1) {

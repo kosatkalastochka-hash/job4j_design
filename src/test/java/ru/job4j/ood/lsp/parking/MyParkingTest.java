@@ -8,26 +8,27 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.*;
 
 class MyParkingTest {
- private Parking parking;
- private Transport car;
- private Transport truck;
- private Transport largeTruck;
+    private Parking parking;
+    private Transport car;
+    private Transport truck;
+    private Transport largeTruck;
 
     @BeforeEach
     void setUp() {
 
         Set<Integer> truckColumns = Set.of(3, 4);
-        parking = new MyParking(3,5,truckColumns);
+        parking = new MyParking(3, 5, truckColumns);
         car = new PassengerCar("М 543 КР 78");
-        truck = new Truck("А 777 АА 116",2);
-        largeTruck = new Truck("С 888 СС 77",3);}
+        truck = new Truck("А 777 АА 116", 2);
+        largeTruck = new Truck("С 888 СС 77", 3);
+    }
 
-        @Test
-        void whenParkCarOnCarSpaceSuccess() {
-            boolean parked = parking.occupySpace(car, 1, 1);
-            assertThat(parked).isTrue();
-            assertThat(parking.isVehicleParked("М 543 КР 78")).isTrue();
-        }
+    @Test
+    void whenParkCarOnCarSpaceSuccess() {
+        boolean parked = parking.occupySpace(car, 1, 1);
+        assertThat(parked).isTrue();
+        assertThat(parking.isVehicleParked("М 543 КР 78")).isTrue();
+    }
 
     @Test
     void whenParkCarOnTruckSpaceFails() {
@@ -42,6 +43,7 @@ class MyParkingTest {
         assertThat(parked).isTrue();
         assertThat(parking.isVehicleParked("А 777 АА 116")).isTrue();
     }
+
     @Test
     void whenParkTruckOnConsecutiveCarSpacesSuccess() {
         boolean parked = parking.occupySpace(largeTruck, 1, 1);
@@ -101,25 +103,35 @@ class MyParkingTest {
         parking.occupySpace(largeTruck, 3, 1);
         assertThatCode(parking::display).doesNotThrowAnyException();
     }
-@Test
-   void findAllSuitableParkingWhenTransportNull(){
+
+    @Test
+    void findAllSuitableParkingWhenTransportNull() {
         assertThatThrownBy(() -> parking.findAllSuitableParking(null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Недопустимое значение аргумента: transport  не может быть null.");
-   }
+    }
 
-   @Test
-   void whenUnparkRegistrationNumberNull() {
+    @Test
+    void whenUnparkRegistrationNumberNull() {
         assertThatThrownBy(() -> parking.unpark(null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Недопустимое значение аргументов: registrationNumber не может быть null.");
-   }
+    }
 
     @Test
     void whenisVehicleParkedNumberNull() {
         assertThatThrownBy(() -> parking.isVehicleParked(null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Недопустимое значение аргумента:registrationNumber  не может быть null.");
+    }
+
+    @Test
+    void occupySpaceWhenTransportAlreadyParked() {
+        boolean parked = parking.occupySpace(car, 1, 1);
+        assertThat(parked).isTrue();
+        assertThatThrownBy(() -> parking.occupySpace(car, 2, 1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Данный транспорт уже запаркован.");
     }
 }
 

@@ -9,21 +9,23 @@ public class LongestUniqueSubstring {
             return "";
         }
         Map<Character, Integer> map = new HashMap<>();
-        String maxString = "";
-        char[] chars = str.toCharArray();
+        int maximumLength = 0;
+        int bestStart = 0;
         int left = 0;
-        for (int right = 0; right < chars.length; right++) {
-            char currentChar = chars[right];
+        for (int right = 0; right < str.length(); right++) {
+            char currentChar = str.charAt(right);
             Integer lastIndex = map.get(currentChar);
             if (lastIndex != null && lastIndex >= left) {
-                String currentSubstring = str.substring(left, right);
-                maxString = currentSubstring.length() > maxString.length() ? currentSubstring : maxString;
+                if ((right - (left + 1)) > maximumLength) {
+                  maximumLength = (right - (left + 1));
+                    bestStart = left;
+                }
                 left = lastIndex + 1;
             }
             map.put(currentChar, right);
         }
-        String lastString = str.substring(left, str.length());
 
-        return lastString.length() > maxString.length() ? lastString : maxString;
+        return  maximumLength > str.length() - left ? str.substring(bestStart, bestStart + maximumLength)
+                : str.substring(left);
     }
 }

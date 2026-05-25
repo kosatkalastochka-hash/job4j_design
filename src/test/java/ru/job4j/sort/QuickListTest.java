@@ -41,9 +41,9 @@ class QuickListTest {
         list.add(user4);
         list.add(user6);
         list.add(user2);
-        QuickList.quickSort(list, comparator);
         List<User> result = new ArrayList<>(list);
         result.sort(comparator);
+        QuickList.quickSort(list, comparator);
         boolean equals = result.equals(list);
         assertThat(equals).isTrue();
     }
@@ -75,9 +75,9 @@ class QuickListTest {
         list.add("Диван");
         list.add("Стул");
         list.add("Кровать");
-        QuickList.quickSort(list, comparator);
         List<String> result = new ArrayList<>(list);
         result.sort(comparator);
+        QuickList.quickSort(list, comparator);
         boolean equals = result.equals(list);
         assertThat(equals).isTrue();
     }
@@ -93,9 +93,9 @@ class QuickListTest {
         list.add("Д");
         list.add("Е");
         list.add("Ё");
-        QuickList.quickSort(list, comparator);
         List<String> result = new ArrayList<>(list);
         result.sort(comparator);
+        QuickList.quickSort(list, comparator);
         boolean equals = result.equals(list);
         assertThat(equals).isTrue();
     }

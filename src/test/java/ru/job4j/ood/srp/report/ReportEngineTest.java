@@ -49,8 +49,7 @@ class ReportEngineTest {
         assertThatThrownBy(() -> engine.generate(null, ReportType.PROGRAMMER, null, null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("""
-                        Для построения отчета необходимо знать критерии отбора сотрудников, укажите filter.""")
-        ;
+                        Для построения отчета необходимо знать критерии отбора сотрудников, укажите filter.""");
     }
 
     @Test

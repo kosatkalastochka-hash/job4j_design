@@ -9,7 +9,7 @@ public class Brackets {
         for (Character character : s.toCharArray()) {
             if ('(' == character || '{' == character || '[' == character) {
                 filter.push(character);
-            } else{
+            } else {
                 if (filter.empty()) {
                     return false;
                 }

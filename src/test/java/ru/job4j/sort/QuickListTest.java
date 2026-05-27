@@ -83,7 +83,7 @@ class QuickListTest {
     }
 
     @Test
-    void whenTypeСharReverseOrder() {
+    void whenTypeCharReverseOrder() {
         Comparator<String> comparator = Comparator.reverseOrder();
         List<String> list = new ArrayList<>();
         list.add("А");
@@ -99,7 +99,6 @@ class QuickListTest {
         boolean equals = result.equals(list);
         assertThat(equals).isTrue();
     }
-
 
     private static class User {
         private Integer id;

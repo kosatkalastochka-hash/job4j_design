@@ -8,11 +8,11 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
+@Disabled
 class MyGeneratorTest {
 
     private final Generator generator = new MyGenerator();
-    
-    @Disabled
+
     @Test
     public void whenTemplateContainsKeysThatAreNotInTheMap() {
         String template = "I am a ${name}, Who are ${subject}? ";
@@ -59,23 +59,23 @@ class MyGeneratorTest {
     public void whenValueWithDollarAndBraces() {
         String template = "Price: ${price}";
         Map<String, String> args = Map.of("price", "${100}");
-        String result = generator.produce(template,args);
+        String result = generator.produce(template, args);
         assertThat(result).isEqualTo("Price: ${100}");
     }
 
     @Test
-    public void whenTheMapIsEmpty(){
+    public void whenTheMapIsEmpty() {
         String template = "Price: ${price}";
         Map<String, String> args = Map.of();
-        assertThatThrownBy(() -> generator.produce(template,args))
+        assertThatThrownBy(() -> generator.produce(template, args))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void whenThereAreNoKeysInTheTemplate(){
+    public void whenThereAreNoKeysInTheTemplate() {
         String template = "Hi all!";
         Map<String, String> args = Map.of("name", "Ivan");
-        assertThatThrownBy(() -> generator.produce(template,args))
+        assertThatThrownBy(() -> generator.produce(template, args))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

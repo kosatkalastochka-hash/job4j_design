@@ -84,9 +84,9 @@ class MyParkingTest {
     @Test
     void whenFindAllSuitableParkingForCar() {
         parking.occupySpace(car, 1, 1);
-        parking.occupySpace(new PassengerCar("М 543 КР 78"), 1, 2);
+        parking.occupySpace(new PassengerCar("М 543 КР 70"), 1, 2);
 
-        var suitable = parking.findAllSuitableParking(new PassengerCar("М 543 КР 78"));
+        var suitable = parking.findAllSuitableParking(new PassengerCar("М 543 КР 60"));
         assertThat(suitable).hasSize(7);
     }
 

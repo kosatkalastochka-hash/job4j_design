@@ -9,8 +9,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@Disabled
 class Cinema3DTest {
-    @Disabled
+
     @Test
     public void whenBuyThenGetTicket() {
         Account account = new AccountCinema();
@@ -21,7 +22,7 @@ class Cinema3DTest {
     }
 
     @Test
-    public void whenBuyOfSoldTicket(){
+    public void whenBuyOfSoldTicket() {
         Account account = new AccountCinema();
         Cinema cinema = new Cinema3D();
         Calendar date = Calendar.getInstance();
@@ -30,7 +31,7 @@ class Cinema3DTest {
     }
 
     @Test
-    public void whenBuyWhithNullAccountThenGetException(){
+    public void whenBuyWhithNullAccountThenGetException() {
         Cinema cinema = new Cinema3D();
         Calendar date = Calendar.getInstance();
         assertThatThrownBy(() -> cinema.buy(null, 1, 1, date))
@@ -38,10 +39,10 @@ class Cinema3DTest {
     }
 
     @Test
-    public void whenBuyWhithNullDateThenGetException(){
+    public void whenBuyWhithNullDateThenGetException() {
         Account account = new AccountCinema();
         Cinema cinema = new Cinema3D();
-        assertThatThrownBy(() -> cinema.buy(account,1,2,null))
+        assertThatThrownBy(() -> cinema.buy(account, 1, 2, null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

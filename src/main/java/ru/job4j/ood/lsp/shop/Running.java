@@ -10,6 +10,4 @@ public class Running {
         WholesaleShop wholesale = new WholesaleShop();
         wholesale.sale("book", 2, 360);
     }
-
-
 }

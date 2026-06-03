@@ -1,8 +1,9 @@
 package ru.job4j.list;
 
 import java.util.NoSuchElementException;
+import java.util.Queue;
 
-public class SimpleQueue<T> {
+public class SimpleQueue<T>  {
     private final SimpleStack<T> input = new SimpleStack<>();
     private final SimpleStack<T> output = new SimpleStack<>();
     int size;
@@ -26,5 +27,9 @@ public class SimpleQueue<T> {
             output.push(input.pop());
         }
         size++;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 }

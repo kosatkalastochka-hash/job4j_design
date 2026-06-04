@@ -157,6 +157,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return list;
     }
 
+    public void clear() {
+        Node node = root;
+        clear(node);
+        root = null;
+    }
+
+    private void clear(Node first) {
+        if (first != null) {
+            clear(first.left);
+            clear(first.right);
+            first.left = null;
+            first.right = null;
+            first.key = null;
+        }
+    }
+
     public List<T> inPostOrder() {
         List<T> list = new ArrayList<>();
         inPostOrder(root, list);

@@ -189,7 +189,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public T minimum() {
-        return Objects.nonNull(root) ? minimum(root).key : null;
+        return Objects.nonNull(root) && Objects.nonNull(minimum(root)) ? minimum(root).key : null;
     }
 
     private Node minimum(Node node) {
@@ -203,7 +203,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public T maximum() {
-        return Objects.nonNull(root) ? maximum(root).key : null;
+        return Objects.nonNull(root) && Objects.nonNull(maximum(root)) ? maximum(root).key : null;
     }
 
     private Node maximum(Node node) {

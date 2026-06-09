@@ -55,24 +55,25 @@ public class AvlTree<T extends Comparable<T>> {
     }
 
     public boolean remove(T element) {
-        boolean result = false;
-        if (Objects.nonNull(element) && Objects.nonNull(root) && contains(root, element)) {
-            root = remove(root, element);
-            result = true;
+        boolean[] removed = {false};
+        if (Objects.nonNull(element) && Objects.nonNull(root)) {
+            root = remove(root, element, removed);
+            return removed[0];
         }
-        return result;
+        return false;
     }
 
-    private Node remove(Node node, T element) {
+    private Node remove(Node node, T element, boolean[] removed) {
         if (node == null) {
             return null;
         }
         int comparisonResult = element.compareTo(node.key);
         if (comparisonResult < 0) {
-            node.left = remove(node.left, element);
+            node.left = remove(node.left, element, removed);
         } else if (comparisonResult > 0) {
-            node.right = remove(node.right, element);
+            node.right = remove(node.right, element, removed);
         } else {
+            removed[0] = true;
             if (node.left == null) {
                 return node.right;
             } else if (node.right == null) {
@@ -81,11 +82,11 @@ public class AvlTree<T extends Comparable<T>> {
                 if (node.left.height > node.right.height) {
                     T heir = maximum(node.left).key;
                     node.key = heir;
-                    node.left = remove(node.left, heir);
+                    node.left = remove(node.left, heir, removed);
                 } else {
                     T heir = minimum(node.right).key;
                     node.key = heir;
-                    node.right = remove(node.right, heir);
+                    node.right = remove(node.right, heir, removed);
                 }
             }
         }
